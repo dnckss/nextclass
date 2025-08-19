@@ -10,7 +10,9 @@ let posts = [
   
   export function getPost(id) {
     //id가 일치하는 post 가져오기
-    return posts.find(p => p.id === Number(id));
+    const numId = parseInt(id);
+    if (isNaN(numId)) return null;
+    return posts.find(p => p.id === numId);
   }
   
   export function addPost(title, content) {
@@ -25,7 +27,9 @@ let posts = [
   }
   
   export function updatePost(id, title, content) {
-    const idx = posts.findIndex(p => p.id === Number(id));
+    const numId = parseInt(id);
+    if (isNaN(numId)) return null;
+    const idx = posts.findIndex(p => p.id === numId);
     if (idx === -1) return null;
    //update
     posts[idx] = { ...posts[idx], title, content };
@@ -33,7 +37,9 @@ let posts = [
   }
   
   export function deletePost(id) {
-    const idx = posts.findIndex(p => p.id === Number(id));
+    const numId = parseInt(id);
+    if (isNaN(numId)) return false;
+    const idx = posts.findIndex(p => p.id === numId);
     if (idx === -1) return false;
    //slice로 삭제처리
     posts = posts.slice(0, idx).concat(posts.slice(idx + 1));
